@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --content-width: 70%;
+    --white: #fff;
+    --secondary-700: #1b6392;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-spin-dot-item {
+    background-color: white !important;
+}

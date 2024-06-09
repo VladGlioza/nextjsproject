@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: white;
+}
+
+.searchbar_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: var(--secondary-700);
+}
+
+.searchbar {
+    width: var(--content-width);
+}
+
+.select_currency {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 16px 0;
+    font-size: 14px;
+}

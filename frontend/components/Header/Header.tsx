@@ -2,6 +2,7 @@ import s from "@/styles/header.module.css";
 import { CurrencySelector } from "./CurrencySelector";
 import { Divider } from "../UI/Divider";
 import { Searchbar } from "./Searhbar";
+import { Navbar } from "./Navbar";
 
 const Header = () => {
     return (
@@ -16,8 +17,7 @@ const Header = () => {
                     <Searchbar />
                 </div>
             </div>
-
-            <div className={s.navbar}></div>
+            <Navbar />
         </div>
     );
 };

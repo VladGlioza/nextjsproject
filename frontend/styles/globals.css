@@ -21,3 +21,7 @@ body {
 .ant-spin-dot-item {
     background-color: white !important;
 }
+
+.ant-select-selection-placeholder {
+    font-weight: 700 !important;
+}

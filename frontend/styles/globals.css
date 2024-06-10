@@ -8,9 +8,14 @@
     --secondary-700: #1b6392;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .ant-spin-dot-item {

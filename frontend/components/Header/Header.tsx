@@ -1,5 +1,7 @@
 import s from "@/styles/header.module.css";
 import { CurrencySelector } from "./CurrencySelector";
+import { Divider } from "../UI/Divider";
+import { Searchbar } from "./Searhbar";
 
 const Header = () => {
     return (
@@ -9,7 +11,9 @@ const Header = () => {
                     <div className={s.select_currency}>
                         <span>Сервіс купівлі-продажу автомобілів</span>
                         <CurrencySelector />
+                        <Divider />
                     </div>
+                    <Searchbar />
                 </div>
             </div>
 

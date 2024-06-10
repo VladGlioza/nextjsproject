@@ -19,7 +19,8 @@
 .select_currency {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 16px 0;
     font-size: 14px;
+    position: relative;
 }

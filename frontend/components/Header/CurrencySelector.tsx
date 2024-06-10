@@ -47,13 +47,16 @@ export const CurrencySelector = () => {
     const filteredItems = items.filter((item) => item.key !== currency);
 
     return (
-        <Dropdown menu={{ items: filteredItems, onClick: handleMenuClick }}>
-            <a onClick={(e) => e.preventDefault()}>
+        <Dropdown
+            trigger={["click"]}
+            menu={{ items: filteredItems, onClick: handleMenuClick }}
+        >
+            <button style={{ cursor: "pointer" }}>
                 <Space>
                     {loading ? <Spin /> : currency.toUpperCase()}
                     <DownOutlined />
                 </Space>
-            </a>
+            </button>
         </Dropdown>
     );
 };

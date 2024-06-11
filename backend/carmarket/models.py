@@ -35,3 +35,12 @@ class Sale(models.Model):
 
     def __str__(self):
         return f"Sale: {self.vehicle} by {self.account.name} for {self.price}"
+
+
+class VehicleImage(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='vehicle_images/')
+    description = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"Image for {self.sale.vehicle} by {self.sale.account.name}"

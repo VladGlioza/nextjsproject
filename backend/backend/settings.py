@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-qy7)7qsglujx-mgyq4alv%*i()*5uv-cbme%w=j^4#35lj2-67
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '192.168.0.106']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
+    'carmarket',
 ]
 
 MIDDLEWARE = [

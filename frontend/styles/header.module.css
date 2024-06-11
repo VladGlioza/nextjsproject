@@ -29,7 +29,7 @@
 .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     width: var(--content-width);
     padding: 15px 0;
 }

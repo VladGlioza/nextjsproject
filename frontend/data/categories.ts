@@ -6,11 +6,11 @@ const CarCategories: CarMenuOption[] = [
         label: "Будь-який",
     },
     {
-        value: "passenger",
+        value: "car",
         label: "Легкові",
     },
     {
-        value: "trucks",
+        value: "truck",
         label: "Вантажівки",
     },
     {
@@ -22,7 +22,7 @@ const CarCategories: CarMenuOption[] = [
         label: "Автобуси",
     },
     {
-        value: "motorhomes",
+        value: "motorhome",
         label: "Автобудинки",
     },
 ];

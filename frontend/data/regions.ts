@@ -2,15 +2,15 @@ import { CarMenuOption } from "@/types/CarBrands";
 
 const Regions: CarMenuOption[] = [
     {
-        value: "Kyiv",
+        value: "ky",
         label: "Київська область",
     },
     {
-        value: "Vinnytsia",
+        value: "vi",
         label: "Вінницька область",
     },
     {
-        value: "Zhytomyr",
+        value: "zh",
         label: "Житомирська область",
     },
 ];

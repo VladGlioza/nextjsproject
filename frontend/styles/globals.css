@@ -22,6 +22,7 @@ body {
     background-color: white !important;
 }
 
-.ant-select-selection-placeholder {
+.ant-select-selection-placeholder,
+.ant-picker-input {
     font-weight: 700 !important;
 }

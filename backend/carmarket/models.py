@@ -14,9 +14,11 @@ class Vehicle(models.Model):
     fuel_type = models.CharField(max_length=20, choices=FUEL_TYPE_CHOICES)
     drive_type = models.CharField(max_length=20, choices=DRIVE_TYPE_CHOICES)
     mileage = models.PositiveIntegerField()
+    gearbox_type = models.CharField(default='auto', max_length=20, choices=GEARBOX_TYPE_CHOICES)
     engine_volume = models.FloatField()
     power = models.PositiveIntegerField()
     color = models.CharField(max_length=50)
+    description = models.CharField(max_length=400, blank=True, null=True)
 
     def clean(self):
         if self.brand and self.model and self.model not in MODEL_CHOICES[self.brand]:
@@ -28,7 +30,7 @@ class Vehicle(models.Model):
 
 class Sale(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -15,6 +15,12 @@ class VehicleSerializer(serializers.ModelSerializer):
                   'engine_volume', 'power', 'color']
 
 
+class VehicleSearchCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vehicle
+        fields = ['brand', 'model', 'year', 'region', 'mileage', 'gearbox_type', 'description']
+
+
 class VehicleCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
@@ -37,4 +43,4 @@ class SaleCartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sale
-        fields = ['vehicle', 'price', 'images']
+        fields = ['id', 'vehicle', 'price', 'images']

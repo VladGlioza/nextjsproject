@@ -16,12 +16,13 @@ export const Price: FC<PriceProps> = ({ amount }) => {
         return <Skeleton.Input size="small" active />;
     }
 
-    const convertedAmount = amount / exchangeRates[currency];
+    const usdToUah = amount * exchangeRates.usd;
+    const convertedAmount = Math.round(usdToUah / exchangeRates[currency]);
     const symbol = currencySymbols[currency];
 
     return (
-        <span className="text-base font-bold text-green-600">
-            {convertedAmount.toFixed(0)} {symbol}
+        <span className="font-bold text-green-600">
+            {convertedAmount.toLocaleString()} {symbol}
         </span>
     );
 };

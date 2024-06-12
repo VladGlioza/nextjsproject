@@ -74,3 +74,11 @@ MODEL_CHOICES = {
     'Nissan': ['Altima', 'Rogue', 'Sentra'],
     'Toyota': ['Camry', 'Corolla', 'RAV4'],
 }
+
+GEARBOX_TYPE_CHOICES = [
+    ('AUTO', 'Автомат'),
+    ('MANUAL', 'Механіка'),
+    ('ROBOT', 'Робот'),
+    ('VARIATOR', 'Варіатор'),
+    ('TIPTRONIC', 'типтронік')
+]

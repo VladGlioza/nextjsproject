@@ -14,7 +14,10 @@ const SalesList: FC<SalesListProps> = ({
     ...rest
 }) => {
     return (
-        <div {...rest} className={classnames("flex flex-row", className)}>
+        <div
+            {...rest}
+            className={classnames("flex flex-row flex-wrap", className)}
+        >
             {saleItems.map((saleItem, idx) => {
                 return <SaleItem key={idx} saleData={saleItem} />;
             })}

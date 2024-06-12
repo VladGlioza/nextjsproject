@@ -39,3 +39,8 @@ body {
     flex-direction: column;
     width: var(--content-width);
 }
+
+.bounce_anim:active {
+    transition: 0.3s;
+    transform: scale(95%);
+}

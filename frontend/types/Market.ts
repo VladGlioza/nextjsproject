@@ -34,6 +34,7 @@ export interface ISale {
 }
 
 export interface ISaleCart {
+    id: number;
     vehicle: IVehicleCart;
     price: number;
     images: IVehicleImage[];

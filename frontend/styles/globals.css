@@ -15,6 +15,7 @@
 body {
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -25,4 +26,16 @@ body {
 .ant-select-selection-placeholder,
 .ant-picker-input {
     font-weight: 700 !important;
+}
+
+.ant-skeleton,
+.ant-skeleton-input {
+    width: 70px !important;
+    min-width: 50px !important;
+}
+
+.main_content {
+    display: flex;
+    flex-direction: column;
+    width: var(--content-width);
 }

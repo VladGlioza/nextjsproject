@@ -3,6 +3,7 @@ import { Public_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import Header from "@/components/Header/Header";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { CurrencyProvider } from "@/providers/CurrencyContext";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
@@ -20,8 +21,10 @@ export default function RootLayout({
         <html lang="ua">
             <body className={publicSans.className}>
                 <AntdRegistry>
-                    <Header />
-                    {children}
+                    <CurrencyProvider>
+                        <Header />
+                        {children}
+                    </CurrencyProvider>
                 </AntdRegistry>
             </body>
         </html>

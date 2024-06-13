@@ -11,7 +11,7 @@ from .filters import SaleVehicleFilter
 
 @api_view(['GET'])
 def get_latest_sales(request):
-    queryset = Sale.objects.order_by('-created_at')[:15]
+    queryset = Sale.objects.order_by('-created_at')[:16]
     serializer = SaleCartSerializer(queryset, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -26,3 +26,12 @@ class VehicleSearchAPIView(generics.ListAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(vehicle__in=Vehicle.objects.all())
+
+
+@api_view(['GET'])
+def get_sale_by_id(request, sale_id):
+    sale_obj = Sale.objects.filter(id=sale_id).first()
+    if not sale_obj:
+        return Response({'error': "Не існує такого оголошення"}, status.HTTP_404_NOT_FOUND)
+    sale_serialzier = SaleSerializer(sale_obj)
+    return Response(sale_serialzier.data, status.HTTP_200_OK)

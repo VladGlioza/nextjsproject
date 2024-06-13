@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Sale, Vehicle, VehicleImage
+from accounts.serializers import AccountSerializer
 
 
 class VehicleImageSerializer(serializers.ModelSerializer):
@@ -9,10 +10,23 @@ class VehicleImageSerializer(serializers.ModelSerializer):
 
 
 class VehicleSerializer(serializers.ModelSerializer):
+    body_type = serializers.SerializerMethodField()
+    gearbox_type = serializers.SerializerMethodField()
+    drive_type = serializers.SerializerMethodField()
+
+    def get_body_type(self, obj):
+        return obj.get_body_type_display()
+
+    def get_gearbox_type(self, obj):
+        return obj.get_gearbox_type_display()
+
+    def get_drive_type(self, obj):
+        return obj.get_drive_type_display()
+
     class Meta:
         model = Vehicle
         fields = ['vehicle_type', 'brand', 'model', 'year', 'region', 'body_type', 'fuel_type', 'drive_type', 'mileage',
-                  'engine_volume', 'power', 'color']
+                  'gearbox_type', 'description', 'engine_volume', 'power', 'color', 'vin_code']
 
 
 class VehicleSearchCartSerializer(serializers.ModelSerializer):
@@ -39,11 +53,11 @@ class VehicleCartSerializer(serializers.ModelSerializer):
 class SaleSerializer(serializers.ModelSerializer):
     vehicle = VehicleSerializer()
     images = VehicleImageSerializer(many=True, read_only=True)
-    user = serializers.StringRelatedField()
+    account = AccountSerializer()
 
     class Meta:
         model = Sale
-        fields = ['user', 'vehicle', 'price', 'created_at', 'updated_at', 'images']
+        fields = ['account', 'vehicle', 'price', 'created_at', 'updated_at', 'images']
 
 
 class SaleCartSerializer(serializers.ModelSerializer):

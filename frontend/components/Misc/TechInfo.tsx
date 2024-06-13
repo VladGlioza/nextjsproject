@@ -13,7 +13,12 @@ export const TechInfo = ({
     const info = [
         { icon: "speedometer", value: formatMileage(mileage) },
         { icon: "map pin", value: formatRegion(region) },
-        { icon: "gasoline", value: `${fuel_type}, ${engine_volume} л.` },
+        {
+            icon: "gasoline",
+            value: `${fuel_type} ${
+                engine_volume > 0 ? `, ${engine_volume} л.` : ""
+            }`,
+        },
         { icon: "gearbox", value: gearbox_type },
     ];
 

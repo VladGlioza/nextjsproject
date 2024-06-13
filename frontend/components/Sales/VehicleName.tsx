@@ -17,7 +17,7 @@ export const VehicleName = ({ id, brand, model, year }: IVehicleName) => {
     return (
         <Fragment>
             {id ? (
-                <Link className={vNameClass} href={`/offer/${id}`}>
+                <Link className={vNameClass} href={`/sale/${id}`}>
                     {carName}
                 </Link>
             ) : (

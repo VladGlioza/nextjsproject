@@ -11,6 +11,8 @@ export interface IVehicle {
     engine_volume: number;
     color: string;
     gearbox_type: string;
+    description: string;
+    vin_code: string;
 }
 
 export interface IVehicleCart {
@@ -27,6 +29,10 @@ export interface IVehicleImage {
 }
 
 export interface ISale {
+    account: {
+        name: string;
+        phone_number: string;
+    };
     vehicle: IVehicle;
     price: number;
     created_at: string;

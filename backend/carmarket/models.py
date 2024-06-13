@@ -18,7 +18,8 @@ class Vehicle(models.Model):
     engine_volume = models.FloatField(null=True, blank=True)
     power = models.PositiveIntegerField(null=True, blank=True)
     color = models.CharField(max_length=50)
-    description = models.CharField(max_length=400, blank=True, null=True)
+    description = models.TextField(max_length=2000, blank=True, null=True)
+    vin_code = models.CharField(max_length=50, blank=True, null=True)
 
     def clean(self):
         if self.brand and self.model and self.model not in MODEL_CHOICES[self.brand]:

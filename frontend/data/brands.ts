@@ -4,6 +4,7 @@ const CarBrands: CarMenuOption[] = [
     { value: "audi", label: "Audi" },
     { value: "bmw", label: "BMW" },
     { value: "chevrolet", label: "Chevrolet" },
+    { value: "daewoo", label: "Daewoo" },
     { value: "ford", label: "Ford" },
     { value: "honda", label: "Honda" },
     { value: "kia", label: "Kia" },

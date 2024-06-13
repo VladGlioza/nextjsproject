@@ -6,6 +6,7 @@ import MImage from "../Misc/MediaImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { VehicleName } from "./VehicleName";
+import { formatMileage } from "@/utils/formatValues";
 
 const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
     const vehicleImage = saleData.images[0]?.image;
@@ -22,8 +23,8 @@ const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
     return (
         <motion.div variants={itemVar} initial="hidden" animate="visible">
             <Link
-                href={`/offer/${saleData.id}`}
-                className="flex flex-col w-[315px] m-[10px] bounce_anim"
+                href={`/sale/${saleData.id}`}
+                className="flex flex-col w-[310px] m-[10px] bounce_anim"
             >
                 <div className="relative flex justify-center items-center w-full text-center h-[220px]">
                     {vehicleImage ? (
@@ -41,7 +42,9 @@ const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
                 <div className="flex flex-row text-[19px]">
                     <Price amount={saleData.price} />
                     <span className="ml-[15px]">
-                        {vehicle.mileage > 0 ? vehicle.mileage : vehicle.region}
+                        {vehicle.mileage > 0
+                            ? formatMileage(vehicle.mileage)
+                            : vehicle.region}
                     </span>
                 </div>
             </Link>

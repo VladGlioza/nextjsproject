@@ -19,8 +19,8 @@ const SaleLargeItem = ({ saleData }: { saleData: ISaleLargeCart }) => {
             className="flex flex-row w-[48%] my-4"
         >
             <Link
-                href={`/offer/${saleData.id}`}
-                className="relative flex justify-center items-center w-[350px] h-[240px] text-center"
+                href={`/sale/${saleData.id}`}
+                className="relative flex justify-center items-center w-[45%] h-[240px] text-center"
             >
                 {vehicleImage ? (
                     <MImage

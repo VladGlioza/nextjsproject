@@ -20,6 +20,8 @@ BODY_TYPE_CHOICES = [
     ('ROADSTER', 'Родстер'),
     ('FASTBACK', 'Фастбек'),
     ('MICROVAN', 'Мікровен'),
+    ('TRACTOR', 'Тягач'),
+    ('BUS', 'Автобус'),
 ]
 
 FUEL_TYPE_CHOICES = [
@@ -37,6 +39,7 @@ DRIVE_TYPE_CHOICES = [
     ('AWD', 'Повний'),
     ('FWD', 'Передній'),
     ('RWD', 'Задній'),
+    ('Chain', 'Ланцюг'),
 ]
 
 REGION_CHOICES = [
@@ -72,6 +75,7 @@ BRAND_CHOICES = [
     ('Audi', 'Audi'),
     ('BMW', 'BMW'),
     ('Chevrolet', 'Chevrolet'),
+    ('Daewoo', 'Daewoo'),
     ('Ford', 'Ford'),
     ('Honda', 'Honda'),
     ('Kia', 'Kia'),
@@ -108,8 +112,9 @@ MODEL_CHOICES = {
     # Cars
     'Audi': ['A3', 'A4', 'A6'],
     'BMW': ['3 Series', '5 Series', '7 Series'],
-    'Chevrolet': ['Cruze', 'Malibu', 'Tahoe'],
-    'Ford': ['Focus', 'Fusion', 'Mustang'],
+    'Chevrolet': ['Cruze', 'Malibu', 'Tahoe', 'Camaro'],
+    'Daewoo': ['Lanos', 'Matiz', 'Sens'],
+    'Ford': ['Focus', 'Fusion', 'Mustang', 'Fiesta'],
     'Honda': ['Accord', 'Civic', 'CR-V'],
     'Kia': ['Optima', 'Sorento', 'Sportage'],
     'Lexus': ['ES', 'RX', 'NX'],

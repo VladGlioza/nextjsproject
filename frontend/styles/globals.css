@@ -42,6 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     width: var(--content-width);
+    min-height: 100vh;
 }
 
 .bounce_anim:active {

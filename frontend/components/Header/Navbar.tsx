@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "@/styles/header.module.css";
 import { Cascader, Button } from "antd";
 import type { CascaderProps, GetProp } from "antd";
-import CarBrands from "@/data/brands";
+import Brands from "@/data/brands";
 import CarCategories from "@/data/categories";
 import Regions from "@/data/regions";
 import { SearchOutlined } from "@ant-design/icons";
 import { DatePicker } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
+import { CarMenuOption } from "@/types/CarBrands";
 
 type DefaultOptionType = GetProp<CascaderProps, "options">[number];
 
@@ -22,7 +23,27 @@ export const Navbar = () => {
         [number | null, number | null] | null
     >(null);
 
+    const [brandOptions, setBrandOptions] = useState<DefaultOptionType[]>(
+        Brands.cars
+    );
+
     const router = useRouter();
+
+    useEffect(() => {
+        setSelectedBrand(null);
+        const typeToOptions: { [key: string]: CarMenuOption[] } = {
+            car: Brands.cars,
+            motorcycle: Brands.motorcycles,
+            truck: Brands.trucks,
+            bus: Brands.buses,
+            motorhome: Brands.motorhomes,
+        };
+        setBrandOptions(
+            selectedType && typeToOptions[selectedType]
+                ? typeToOptions[selectedType]
+                : []
+        );
+    }, [selectedType]);
 
     const onChange = (
         value: any,
@@ -55,9 +76,18 @@ export const Navbar = () => {
         );
 
     const items = [
-        { label: "Марка", data: CarBrands },
-        { label: "Тип транспорту", data: CarCategories, defaultValue: ["any"] },
-        { label: "Регіон", data: Regions },
+        {
+            label: "Марка",
+            data: brandOptions,
+            value: selectedBrand,
+        },
+        {
+            label: "Тип транспорту",
+            data: CarCategories,
+            defaultValue: ["any"],
+            value: selectedType,
+        },
+        { label: "Регіон", data: Regions, value: selectedRegion },
     ];
 
     const { RangePicker } = DatePicker;
@@ -108,11 +138,12 @@ export const Navbar = () => {
                         onChange={(value, selectedOptions) =>
                             onChange(value, selectedOptions, item.label)
                         }
+                        value={item.value !== null ? [item.value] : []}
                         placeholder={item.label}
                         showSearch={{ filter }}
                         size="large"
                         defaultValue={item.defaultValue}
-                        notFoundContent="Немає інформації"
+                        notFoundContent="Спочатку оберіть тип транспорту"
                     />
                 );
             })}
@@ -127,7 +158,6 @@ export const Navbar = () => {
             <Button
                 type="primary"
                 icon={<SearchOutlined />}
-                iconPosition={"end"}
                 size="large"
                 onClick={handleSearch}
             >

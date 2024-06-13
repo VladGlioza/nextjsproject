@@ -34,6 +34,10 @@ body {
     min-width: 50px !important;
 }
 
+.ant-cascader-menu-item-content {
+    color: rgb(95, 93, 93) !important;
+}
+
 .main_content {
     display: flex;
     flex-direction: column;

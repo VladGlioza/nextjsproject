@@ -2,11 +2,16 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getDataFromAPI } from "@/utils/getData";
+import SaleLargeItem from "./SaleLargeItem";
+import { motion } from "framer-motion";
+import { ISaleLargeCart } from "@/types/Market";
+import { PageLoader } from "../Misc/PageLoader";
+import { searchContainerVars } from "@/utils/motionVariants";
+import { NotFound } from "./NotFound";
 
 const SearchComponent = () => {
     const searchParams = useSearchParams();
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<ISaleLargeCart[] | null>(null);
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -45,11 +50,25 @@ const SearchComponent = () => {
                 console.error("e: ", error);
             }
         };
-
+        setResults(null);
         fetchResults();
     }, [searchParams]);
 
-    return <></>;
+    if (!results) return <PageLoader />;
+    if (results.length == 0) return <NotFound />;
+
+    return (
+        <motion.div
+            variants={searchContainerVars}
+            className="w-full flex flex-row flex-wrap justify-between"
+            initial="hidden"
+            animate="visible"
+        >
+            {results.map((saleData, idx) => {
+                return <SaleLargeItem key={idx} saleData={saleData} />;
+            })}
+        </motion.div>
+    );
 };
 
 export default SearchComponent;

@@ -6,7 +6,10 @@ interface MediaImageProps extends ImageProps {
 }
 
 const MImage: FC<MediaImageProps> = ({ src, ...props }) => {
-    const mediaSrc = `${process.env.NEXT_PUBLIC_BACKEND_URL}${src}`;
+    const isAbsoluteUrl = /^https?:\/\//i.test(src);
+    const mediaSrc = isAbsoluteUrl
+        ? src
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}${src}`;
 
     return <Image {...props} src={mediaSrc} />;
 };

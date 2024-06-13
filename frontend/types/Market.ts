@@ -10,6 +10,7 @@ export interface IVehicle {
     mileage: number;
     engine_volume: number;
     color: string;
+    gearbox_type: string;
 }
 
 export interface IVehicleCart {
@@ -33,9 +34,18 @@ export interface ISale {
     images: IVehicleImage[];
 }
 
-export interface ISaleCart {
+export interface ISaleCart extends Omit<ISale, "vehicle"> {
     id: number;
     vehicle: IVehicleCart;
-    price: number;
-    images: IVehicleImage[];
+}
+
+export interface IVehicleLargeCart extends IVehicleCart {
+    gearbox_type: string;
+    engine_volume: number;
+    description: string;
+    fuel_type: string;
+}
+
+export interface ISaleLargeCart extends Omit<ISaleCart, "vehicle"> {
+    vehicle: IVehicleLargeCart;
 }

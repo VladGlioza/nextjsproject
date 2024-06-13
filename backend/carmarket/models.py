@@ -14,7 +14,7 @@ class Vehicle(models.Model):
     fuel_type = models.CharField(max_length=20, choices=FUEL_TYPE_CHOICES)
     drive_type = models.CharField(max_length=20, choices=DRIVE_TYPE_CHOICES)
     mileage = models.PositiveIntegerField()
-    gearbox_type = models.CharField(default='auto', max_length=20, choices=GEARBOX_TYPE_CHOICES)
+    gearbox_type = models.CharField(default='AUTO', max_length=20, choices=GEARBOX_TYPE_CHOICES)
     engine_volume = models.FloatField()
     power = models.PositiveIntegerField()
     color = models.CharField(max_length=50)

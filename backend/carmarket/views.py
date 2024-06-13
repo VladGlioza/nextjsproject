@@ -6,7 +6,7 @@ from rest_framework import status
 from .serializers import *
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
-from .filters import VehicleFilter
+from .filters import SaleVehicleFilter
 
 
 @api_view(['GET'])
@@ -18,7 +18,11 @@ def get_latest_sales(request):
 
 
 class VehicleSearchAPIView(generics.ListAPIView):
-    queryset = Vehicle.objects.all()
-    serializer_class = VehicleSearchCartSerializer
+    queryset = Sale.objects.all()
+    serializer_class = SaleSearchCartSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_class = VehicleFilter
+    filterset_class = SaleVehicleFilter
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(vehicle__in=Vehicle.objects.all())

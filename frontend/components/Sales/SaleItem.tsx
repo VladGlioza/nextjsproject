@@ -5,6 +5,7 @@ import { Price } from "../Misc/Price";
 import MImage from "../Misc/MediaImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { VehicleName } from "./VehicleName";
 
 const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
     const vehicleImage = saleData.images[0]?.image;
@@ -36,11 +37,7 @@ const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
                         <span>Немає зображення</span>
                     )}
                 </div>
-
-                <span className="text-[17px] text-cyan-700">
-                    {vehicle.brand} {vehicle.model} {vehicle.year}
-                </span>
-
+                <VehicleName {...vehicle} />
                 <div className="flex flex-row text-[19px]">
                     <Price amount={saleData.price} />
                     <span className="ml-[15px]">

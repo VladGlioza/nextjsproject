@@ -16,9 +16,18 @@ class VehicleSerializer(serializers.ModelSerializer):
 
 
 class VehicleSearchCartSerializer(serializers.ModelSerializer):
+    fuel_type = serializers.SerializerMethodField()
+    gearbox_type = serializers.SerializerMethodField()
+
+    def get_fuel_type(self, obj):
+        return obj.get_fuel_type_display()
+
+    def get_gearbox_type(self, obj):
+        return obj.get_gearbox_type_display()
+
     class Meta:
         model = Vehicle
-        fields = ['brand', 'model', 'year', 'region', 'mileage', 'gearbox_type', 'description']
+        fields = ['brand', 'model', 'year', 'region', 'mileage', 'gearbox_type', 'description', 'engine_volume', 'fuel_type']
 
 
 class VehicleCartSerializer(serializers.ModelSerializer):
@@ -39,6 +48,15 @@ class SaleSerializer(serializers.ModelSerializer):
 
 class SaleCartSerializer(serializers.ModelSerializer):
     vehicle = VehicleCartSerializer()
+    images = VehicleImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Sale
+        fields = ['id', 'vehicle', 'price', 'images']
+
+
+class SaleSearchCartSerializer(serializers.ModelSerializer):
+    vehicle = VehicleSearchCartSerializer()
     images = VehicleImageSerializer(many=True, read_only=True)
 
     class Meta:

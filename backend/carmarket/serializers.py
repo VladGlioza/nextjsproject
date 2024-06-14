@@ -76,3 +76,17 @@ class SaleSearchCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = ['id', 'vehicle', 'price', 'images']
+
+
+class VehicleVinSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vehicle
+        fields = ['brand', 'model', 'year', 'region', 'vin_code']
+
+
+class SaleVinSearchSerializer(serializers.ModelSerializer):
+    vehicle = VehicleVinSearchSerializer()
+
+    class Meta:
+        model = Sale
+        fields = ['id', 'vehicle', 'price']

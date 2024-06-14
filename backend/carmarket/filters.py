@@ -12,3 +12,11 @@ class SaleVehicleFilter(filters.FilterSet):
     class Meta:
         model = Sale
         fields = ['year_gte', 'year_lte', 'region', 'brand', 'car_type']
+
+
+class VinCodeFilter(filters.FilterSet):
+    vin_code = filters.CharFilter(field_name='vehicle__vin_code', lookup_expr='icontains')
+
+    class Meta:
+        model = Sale
+        fields = ['vin_code']

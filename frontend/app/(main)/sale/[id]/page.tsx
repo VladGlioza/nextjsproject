@@ -25,7 +25,6 @@ export default async function SearchPage({
         { label: "Колір", value: vehicle.color },
     ];
 
-    console.log(data.account);
     return (
         <div className="flex flex-col mt-[15px] bg-amber-50">
             <h1 className="font-bold text-[33px] ml-[15px]">

@@ -55,3 +55,17 @@ export interface IVehicleLargeCart extends IVehicleCart {
 export interface ISaleLargeCart extends Omit<ISaleCart, "vehicle"> {
     vehicle: IVehicleLargeCart;
 }
+
+export interface IVehicleVinSearch {
+    brand: string;
+    model: string;
+    year: number;
+    region: string;
+    vin_code: string;
+}
+
+export interface ISaleVinSearchCart {
+    id: number;
+    price: number;
+    vehicle: IVehicleVinSearch;
+}

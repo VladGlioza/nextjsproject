@@ -9,7 +9,6 @@ export const TechInfo = ({
     engine_volume,
     gearbox_type,
 }: IVehicle) => {
-    console.log(region);
     const info = [
         { icon: "speedometer", value: formatMileage(mileage) },
         { icon: "map pin", value: formatRegion(region) },

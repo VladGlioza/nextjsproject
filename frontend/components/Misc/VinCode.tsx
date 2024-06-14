@@ -1,13 +1,16 @@
 export const VinCode = ({ code }: { code: string }) => {
-    const colorStyle = code ? "sky" : "orange";
+    const colorStyle = code ? "#6c6cc1" : "orange";
 
     return (
         <div
-            style={{ borderColor: code ? "blue" : "orange" }}
+            style={{ borderColor: colorStyle }}
             className={`my-2 flex flex-row items-center border-2`}
         >
             <span
-                className={`flex justify-center w-[25%] h-full  bg-${colorStyle}-700 text-white font-semibold`}
+                style={{
+                    background: colorStyle,
+                }}
+                className={`flex justify-center text-white w-[25%] h-full font-semibold`}
             >
                 VIN
             </span>

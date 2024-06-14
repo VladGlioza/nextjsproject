@@ -6,7 +6,7 @@ from rest_framework import status
 from .serializers import *
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
-from .filters import SaleVehicleFilter
+from .filters import SaleVehicleFilter, VinCodeFilter
 
 
 @api_view(['GET'])
@@ -35,3 +35,14 @@ def get_sale_by_id(request, sale_id):
         return Response({'error': "Не існує такого оголошення"}, status.HTTP_404_NOT_FOUND)
     sale_serialzier = SaleSerializer(sale_obj)
     return Response(sale_serialzier.data, status.HTTP_200_OK)
+
+
+class VehicleVinCodeSearchAPIView(generics.ListAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleVinSearchSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = VinCodeFilter
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(vehicle__in=Vehicle.objects.all())

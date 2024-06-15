@@ -8,6 +8,9 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from social_django.utils import psa
 from .models import Account
+from .serializers import AccountSerializer
+from carmarket.models import Sale
+from carmarket.serializers import SaleCartSerializer
 
 
 @api_view(['POST'])
@@ -66,3 +69,36 @@ def login(request):
         })
     else:
         return Response({'error': 'Невірний логін або пароль'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile(request):
+    user = request.user
+    account = user.account
+    account_serializer = AccountSerializer(account)
+    sales = Sale.objects.filter(account=account)
+    sales_serializer = SaleCartSerializer(sales, many=True)
+
+    return Response({
+        'account': account_serializer.data,
+        'sales': sales_serializer.data
+    }, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def edit_number(request, phone_number):
+    user = request.user
+    account = user.account
+
+    if not phone_number or len(phone_number) != 10:
+        return Response({'error': "В номері має бути 10 цифр"}, status.HTTP_400_BAD_REQUEST)
+
+    if phone_number == account.phone_number:
+        return Response({'error': "Новий номер має відрізнятися"}, status.HTTP_400_BAD_REQUEST)
+
+    account.phone_number = phone_number
+    account.save()
+
+    return Response({'success': "Успішно змінили номер"}, status.HTTP_200_OK)

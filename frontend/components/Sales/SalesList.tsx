@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FC, Fragment } from "react";
 import classnames from "classnames";
 import { ISaleCart } from "@/types/Market";
 import SaleItem from "./SaleItem";
@@ -14,14 +14,17 @@ const SalesList: FC<SalesListProps> = ({
     ...rest
 }) => {
     return (
-        <div
-            {...rest}
-            className={classnames("flex flex-row flex-wrap", className)}
-        >
-            {saleItems.map((saleItem, idx) => {
-                return <SaleItem key={idx} saleData={saleItem} />;
-            })}
-        </div>
+        <Fragment>
+            {children}
+            <div
+                {...rest}
+                className={classnames("flex flex-row flex-wrap", className)}
+            >
+                {saleItems.map((saleItem, idx) => {
+                    return <SaleItem key={idx} saleData={saleItem} />;
+                })}
+            </div>
+        </Fragment>
     );
 };
 

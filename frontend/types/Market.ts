@@ -1,3 +1,5 @@
+import { IAccount } from "./Profile";
+
 export interface IVehicle {
     vehicle_type: string;
     brand: string;
@@ -29,10 +31,7 @@ export interface IVehicleImage {
 }
 
 export interface ISale {
-    account: {
-        name: string;
-        phone_number: string;
-    };
+    account: IAccount;
     vehicle: IVehicle;
     price: number;
     created_at: string;

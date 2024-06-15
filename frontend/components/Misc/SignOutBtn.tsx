@@ -5,8 +5,15 @@ import { signOut } from "next-auth/react";
 
 export const SignOutBtn = () => {
     return (
-        <Button onClick={() => signOut()} type="primary" danger>
-            Вийти з акаунту
-        </Button>
+        <div className="my-4">
+            <Button
+                size="large"
+                onClick={() => signOut()}
+                type="primary"
+                danger
+            >
+                Вийти з акаунту
+            </Button>
+        </div>
     );
 };

@@ -7,16 +7,20 @@ import {
     formatPhoneNumberWithAreaCode,
 } from "@/utils/formatValues";
 
-export const PhoneNumber = ({ phoneNumber }: { phoneNumber: string }) => {
+export const PhoneNumber = ({
+    phoneNumber,
+}: {
+    phoneNumber: string | null;
+}) => {
     const [showPhone, setShowPhone] = useState<boolean>(false);
 
     return (
         <Button size="large" onClick={() => setShowPhone(!showPhone)}>
             <span className="text-[19px] font-bold text-green-700">
                 {showPhone ? (
-                    <>{formatPhoneNumberWithAreaCode(phoneNumber)}</>
+                    <>{formatPhoneNumberWithAreaCode(phoneNumber!)}</>
                 ) : (
-                    <>{formatHiddenPhoneNumber(phoneNumber)}</>
+                    <>{formatHiddenPhoneNumber(phoneNumber!)}</>
                 )}
             </span>
         </Button>

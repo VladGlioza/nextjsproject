@@ -11,6 +11,18 @@ export const Input = ({
 }: InputProps) => {
     return (
         <div className={"relative flex flex-col " + (containerClass || "")}>
+            {error && (
+                <div
+                    className="text-[14px] text-red-500 text-center"
+                    style={{
+                        opacity: `${error ? 1 : 0}`,
+                        transition: "ease-in-out 0.3s",
+                    }}
+                >
+                    {error}
+                </div>
+            )}
+
             <input
                 {...props}
                 style={{ width: "100%" }}

@@ -14,13 +14,15 @@ export const PhoneNumber = ({
 }) => {
     const [showPhone, setShowPhone] = useState<boolean>(false);
 
+    if (!phoneNumber) return;
+
     return (
         <Button size="large" onClick={() => setShowPhone(!showPhone)}>
             <span className="text-[19px] font-bold text-green-700">
                 {showPhone ? (
-                    <>{formatPhoneNumberWithAreaCode(phoneNumber!)}</>
+                    <>{formatPhoneNumberWithAreaCode(phoneNumber)}</>
                 ) : (
-                    <>{formatHiddenPhoneNumber(phoneNumber!)}</>
+                    <>{formatHiddenPhoneNumber(phoneNumber)}</>
                 )}
             </span>
         </Button>

@@ -66,7 +66,6 @@ export const EditNumber = () => {
                 handleFormSubmit(values).then((res) => {
                     if (res && !res.ok) {
                         setError(
-                            //@ts-ignore
                             res.data?.error ||
                                 "Виникла помилка при редагуванні номера"
                         );

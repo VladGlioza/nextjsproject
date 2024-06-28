@@ -21,9 +21,9 @@ class Vehicle(models.Model):
     description = models.TextField(max_length=2000, blank=True, null=True)
     vin_code = models.CharField(max_length=50, blank=True, null=True)
 
-    def clean(self):
-        if self.brand and self.model and self.model not in MODEL_CHOICES[self.brand]:
-            raise ValidationError({'model': 'This model is not valid for the selected brand.'})
+    # def clean(self):
+    #     if self.brand and self.model and self.model not in MODEL_CHOICES[self.brand]:
+    #         raise ValidationError({'model': 'This model is not valid for the selected brand.'})
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
@@ -33,6 +33,7 @@ class Sale(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
+    is_active = models.BooleanField(default=True, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

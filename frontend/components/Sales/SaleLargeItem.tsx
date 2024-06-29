@@ -10,7 +10,7 @@ import { searchCartItemVars } from "@/utils/motionVariants";
 import Link from "next/link";
 
 const SaleLargeItem = ({ saleData }: { saleData: ISaleLargeCart }) => {
-    const vehicleImage = saleData.images[0]?.image;
+    const vehicleImage = saleData.images[saleData.images.length - 1]?.image_url;
     const vehicle = saleData.vehicle;
 
     return (
@@ -24,7 +24,7 @@ const SaleLargeItem = ({ saleData }: { saleData: ISaleLargeCart }) => {
             >
                 {vehicleImage ? (
                     <MImage
-                        src={saleData.images[0].image}
+                        src={vehicleImage}
                         alt={saleData.vehicle.model}
                         fill
                         style={{ objectFit: "cover" }}

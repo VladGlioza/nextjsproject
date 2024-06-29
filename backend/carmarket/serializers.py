@@ -90,3 +90,20 @@ class SaleVinSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = ['id', 'vehicle', 'price']
+
+
+class VehicleUploadImageSerializer(serializers.ModelSerializer):
+    sale_id = serializers.IntegerField(write_only=True)  # Добавляем поле для sale_id
+
+    class Meta:
+        model = VehicleImage
+        fields = ('id', 'sale_id', 'image', 'description')
+
+    def create(self, validated_data):
+        sale_id = validated_data.pop('sale_id')
+        sale = Sale.objects.get(pk=sale_id)
+        image = validated_data.pop('image')
+        instance = VehicleImage.objects.create(sale=sale, image=image, **validated_data)
+        sale.is_active = True
+        sale.save()
+        return instance

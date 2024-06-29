@@ -38,7 +38,12 @@ export const EditSaleBtns = ({ saleId }: { saleId: number }) => {
     return (
         <div className="flex flex-row my-1.5 w-full justify-around">
             {contextHolder}
-            <Button type="primary">Додати фото</Button>
+            <Button
+                type="primary"
+                onClick={() => router.push(`/sale/${saleId}/upload-image`)}
+            >
+                Додати фото
+            </Button>
             <Popconfirm
                 title="Видалити оголошення"
                 description="Ви впевнені, що хочете видалити це оголошення?"

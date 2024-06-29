@@ -2,12 +2,13 @@ from .models import Sale, Vehicle
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from .serializers import *
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import SaleVehicleFilter, VinCodeFilter
 from .constants import *
+from rest_framework.views import APIView
 
 @api_view(['GET'])
 def get_latest_sales(request):
@@ -92,7 +93,6 @@ def add_new_sale(request):
     brand_choices_lower = {brand.lower() for brand, _ in BRAND_CHOICES}
     vehicle_type_choices_lower = {v_type.lower() for v_type, _ in VEHICLE_TYPE_CHOICES}
     region_choices_lower = {region[0].lower() for region in REGION_CHOICES}
-    print(brand_choices_lower)
 
     if brand.lower() not in brand_choices_lower:
         return Response({'error': "Неможливо додати авто цієї марки"}, status.HTTP_400_BAD_REQUEST)
@@ -146,3 +146,14 @@ def delete_sale(request, sale_id):
     sale_obj.vehicle.delete()
 
     return Response({"success": "Видалили оголошення"}, status.HTTP_200_OK)
+
+
+class VehicleImageView(APIView):
+    def post(self, request, format=None):
+        serializer = VehicleUploadImageSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -36,14 +36,6 @@ export const Searchbar = () => {
                 />
             </div>
             <div className="flex flex-row justify-between">
-                <Link href="/favourites">
-                    <Image
-                        src={"/icons/Heart.png"}
-                        width={32}
-                        height={32}
-                        alt="heart"
-                    />
-                </Link>
                 <Link href="/profile" className="ml-[15px]">
                     <Image
                         src={"/icons/User.png"}

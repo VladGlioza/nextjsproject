@@ -10,8 +10,6 @@ export default async function AddNewSale() {
         session?.user.access
     );
 
-    console.log(data);
-
     return (
         <div className="flex flex-col mt-[15px] tabular-nums">
             <AddSaleForm />

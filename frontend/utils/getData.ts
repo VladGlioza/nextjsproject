@@ -20,11 +20,15 @@ export async function getProtectedData(
 ) {
     "use server";
 
+    const headers: HeadersInit = {};
+
+    if (accessToken) {
+        headers.Authorization = `Bearer ${accessToken}`;
+    }
+
     const response = await fetch(`${process.env.API_URL}${apiRoute}`, {
         cache: "no-store",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
+        headers,
     });
 
     return response.json();

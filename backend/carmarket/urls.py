@@ -9,4 +9,5 @@ urlpatterns = [
     path('search-by-vin/', VehicleVinCodeSearchAPIView.as_view(), name='search-by-vin-code'),
     path('get-add-sale-data/', views.get_add_sale_data, name='get-add-sale-data'),
     path('add-sale/', views.add_new_sale, name='add-new-sale'),
+    path('<int:sale_id>/delete/', views.delete_sale, name='delete-sale'),
 ]

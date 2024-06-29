@@ -31,6 +31,7 @@ export interface IVehicleImage {
 }
 
 export interface ISale {
+    id: number;
     account: IAccount;
     vehicle: IVehicle;
     price: number;

@@ -1,6 +1,6 @@
 from .models import Sale, Vehicle
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
@@ -29,12 +29,27 @@ class VehicleSearchAPIView(generics.ListAPIView):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_sale_by_id(request, sale_id):
+    user = request.user
+
     sale_obj = Sale.objects.filter(id=sale_id).first()
     if not sale_obj:
         return Response({'error': "Не існує такого оголошення"}, status.HTTP_404_NOT_FOUND)
     sale_serialzier = SaleSerializer(sale_obj)
-    return Response(sale_serialzier.data, status.HTTP_200_OK)
+
+    is_active_sale = True
+    is_user_sale = False
+    if not user.is_anonymous:
+        account = user.account
+        is_user_sale = sale_obj.account == account
+        is_active_sale = sale_obj.is_active
+
+    return Response({
+        "is_user_sale": is_user_sale,
+        "is_active": is_active_sale,
+        "data": sale_serialzier.data
+    }, status.HTTP_200_OK)
 
 
 class VehicleVinCodeSearchAPIView(generics.ListAPIView):
@@ -72,7 +87,7 @@ def add_new_sale(request):
     color = request.data.get('year')
     description = request.data.get('vehicle_description')
     price = request.data.get('price')
-    print(brand)
+    vin_code = request.data.get('vin_code')
 
     brand_choices_lower = {brand.lower() for brand, _ in BRAND_CHOICES}
     vehicle_type_choices_lower = {v_type.lower() for v_type, _ in VEHICLE_TYPE_CHOICES}
@@ -107,11 +122,27 @@ def add_new_sale(request):
         region=region,
         color=color,
         description=description,
+        vin_code=vin_code,
     )
     sale_obj = Sale.objects.create(
         account=account,
         vehicle=vehicle_obj,
         price=price,
+        is_active=False,
     )
 
     return Response({"id": sale_obj.id}, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete_sale(request, sale_id):
+    account = request.user.account
+
+    sale_obj = Sale.objects.filter(id=sale_id, account=account).first()
+    if not sale_obj:
+        return Response({'error': "У вас немає оголошення з таким id"}, status.HTTP_400_BAD_REQUEST)
+
+    sale_obj.vehicle.delete()
+
+    return Response({"success": "Видалили оголошення"}, status.HTTP_200_OK)

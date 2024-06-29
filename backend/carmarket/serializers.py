@@ -57,7 +57,7 @@ class SaleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sale
-        fields = ['account', 'vehicle', 'price', 'created_at', 'updated_at', 'images']
+        fields = ['id', 'account', 'vehicle', 'price', 'created_at', 'updated_at', 'images']
 
 
 class SaleCartSerializer(serializers.ModelSerializer):

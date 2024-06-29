@@ -65,15 +65,15 @@ export default async function SalePage({ params }: { params: { id: string } }) {
                 </div>
                 <div className="w-[60%]">
                     <Carousel arrows infinite>
-                        {data.images.map((saleImg, idx) => {
+                        {data.images.reverse().map((saleImg, idx) => {
                             return (
                                 <div
                                     key={idx}
                                     className="relative flex w-full h-[550px]"
                                 >
                                     <MImage
-                                        src={saleImg.image}
-                                        alt={saleImg.image}
+                                        src={saleImg.image_url}
+                                        alt={saleImg.image_url}
                                         fill
                                         style={{ objectFit: "cover" }}
                                     />

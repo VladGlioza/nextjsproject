@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from accounts.models import Account
 from .constants import *
+from cloudinary.models import CloudinaryField
 
 
 class Vehicle(models.Model):
@@ -43,8 +44,14 @@ class Sale(models.Model):
 
 class VehicleImage(models.Model):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='vehicle_images/')
+    image = CloudinaryField('image')
     description = models.CharField(max_length=255, blank=True)
+
+    @property
+    def image_url(self):
+        return (
+            f"https://res.cloudinary.com/drzuriuq2/{self.image}"
+        )
 
     def __str__(self):
         return f"Image for {self.sale.vehicle} by {self.sale.account.name}"

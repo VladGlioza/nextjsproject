@@ -26,7 +26,7 @@ export interface IVehicleCart {
 }
 
 export interface IVehicleImage {
-    image: string;
+    image_url: string;
     description: string;
 }
 

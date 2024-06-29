@@ -4,9 +4,17 @@ from accounts.serializers import AccountSerializer
 
 
 class VehicleImageSerializer(serializers.ModelSerializer):
+    image_url = serializers.ReadOnlyField()
+
     class Meta:
         model = VehicleImage
-        fields = ['image', 'description']
+        fields = ['image_url', 'image', 'description']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.pop("image")
+
+        return representation
 
 
 class VehicleSerializer(serializers.ModelSerializer):

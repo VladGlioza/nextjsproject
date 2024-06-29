@@ -1,6 +1,10 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -9,9 +13,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-qy7)7qsglujx-mgyq4alv%*i()*5uv-cbme%w=j^4#35lj2-67'
 
+CLOUDINARY_URL = f'cloudinary://{os.environ.get("CLOUDINARY_API_KEY")}:{os.environ.get("CLOUDINARY_API_SECRET")}@{os.environ.get("CLOUDINARY_CLOUD_NAME")}'
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET")
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,11 +75,7 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_CLIENT_ID")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_SECRET")
 
-CORS_ALLOW_ALL_ORIGINS = False
-
-CORS_ALLOWED_ORIGINS = [
-    'https://nextjsproject-five-weld.vercel.app',
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
@@ -161,8 +170,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = f'https://res.cloudinary.com/{os.environ.get("CLOUDINARY_CLOUD_NAME")}/image/upload/'
+MEDIA_ROOT = ''
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

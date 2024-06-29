@@ -9,7 +9,7 @@ import { VehicleName } from "./VehicleName";
 import { formatMileage } from "@/utils/formatValues";
 
 const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
-    const vehicleImage = saleData.images[0]?.image;
+    const vehicleImage = saleData.images[0]?.image_url;
     const vehicle = saleData.vehicle;
 
     const itemVar = {
@@ -29,7 +29,10 @@ const SaleItem = ({ saleData }: { saleData: ISaleCart }) => {
                 <div className="relative flex justify-center items-center w-full text-center h-[220px]">
                     {vehicleImage ? (
                         <MImage
-                            src={saleData.images[0].image}
+                            src={
+                                saleData.images[saleData.images.length - 1]
+                                    .image_url
+                            }
                             alt={saleData.vehicle.model}
                             fill
                             style={{ objectFit: "cover" }}
